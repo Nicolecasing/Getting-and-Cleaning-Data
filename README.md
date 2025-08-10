@@ -14,7 +14,8 @@ if(!file.exists(getdataURL)) {
 
 #unzip the zip file
 
-dataaPath <- "UCI HAR Dataset"
+dataPath <- "UCI HAR Dataset"
+
 if (!file.exists(dataPath)) {
   unzip(getdataURL)
 }
@@ -25,14 +26,18 @@ if (!file.exists(dataPath)) {
 #read training data
 
 trainingSubject <- read.table(file.path(dataPath, "train", "subject_train.txt"))
+
 trainingValues <- read.table(file.path(dataPath, "train", "X_train.txt"))
+
 trainingActivity <- read.table(file.path(dataPath, "train", "y_train.txt"))
 
 
 #read test data
 
 testSubject <- read.table(file.path(dataPath, "test", "subject_test.txt"))
+
 testValues <- read.table(file.path(dataPath, "test", "X_test.txt"))
+
 testActivity <- read.table(file.path(dataPath, "test", "y_test.txt"))
 
 
@@ -44,6 +49,7 @@ features <- read.table(file.path(dataPath, "features.txt"), as.is = TRUE)
 #read activity labels
 
 activities <- read.table(file.path(dataPath, "activity_labels.txt"))
+
 colnames(activities) <- c("activityId", "activityLabel")
 
 ##STEP 1 - merge the train and test data sets into a single data table
@@ -72,6 +78,7 @@ Activity <- Activity[, retainCol]
 
 
 ##describe each activity
+
 Activity$activity <- factor(Activity$activity, levels = activities[, 1], labels = activities[, 2])
 
 
@@ -84,12 +91,19 @@ ActivityCols <- colnames(Activity)
 #expand abbreviations and clean up names
 
 ActivityCols <- gsub("^f", "frequencyDomain", ActivityCols)
+
 ActivityCols <- gsub("^t", "timeDomain", ActivityCols)
+
 ActivityCols <- gsub("Acc", "Accelerometer", ActivityCols)
+
 ActivityCols <- gsub("Gyro", "Gyroscope", ActivityCols)
+
 ActivityCols <- gsub("Mag", "Magnitude", ActivityCols)
+
 ActivityCols <- gsub("Freq", "Frequency", ActivityCols)
+
 ActivityCols <- gsub("mean", "Mean", ActivityCols)
+
 ActivityCols <- gsub("std", "StandardDeviation", ActivityCols)
 
 ##STEP 4 - Create a second, independent tidy set with the aveage of each variable for each
