@@ -28,10 +28,10 @@ testSubject <- read.table(file.path(dataPath, "test", "subject_test.txt"))
 testValues <- read.table(file.path(dataPath, "test", "X_test.txt"))
 testActivity <- read.table(file.path(dataPath, "test", "y_test.txt"))
 
-# read features, don't convert text labels to factors
+#read features, don't convert text labels to factors
 features <- read.table(file.path(dataPath, "features.txt"), as.is = TRUE)
 
-# read activity labels
+#read activity labels
 activities <- read.table(file.path(dataPath, "activity_labels.txt"))
 colnames(activities) <- c("activityId", "activityLabel")
 
@@ -41,10 +41,10 @@ Activities <- rbind (
     cbind(testSubject, testValues, testActivity)
 )
 
-# remove the individual data tables to save some memory
+#remove the individual data tables to save some memory
 rm(trainingSubjects, trainingValues, trainingActivity, testSubjects, testValues, testActivity)
 
-# assign column names
+#assign column names
 colnames(Activity) <- c("subject", features[, 2], "activity")
 
 ##STEP 2 - Only extract the mean and standard deviation for each measurement
@@ -55,7 +55,7 @@ Activity <- Activity[, retainCol]
 ##describe each activity
 Activity$activity <- factor(Activity$activity, levels = activities[, 1], labels = activities[, 2])
 
-## STEP 3 - label the descriptive variable names
+##STEP 3 - label the descriptive variable names
 
 #column names
 ActivityCols <- colnames(Activity)
