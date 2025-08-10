@@ -78,5 +78,5 @@ ActivityMeans <- humanActivity %>%
     summarise_each(funs(mean))
 
 ##make a text file "tidy_data.text"
-write.table(ActivityMeans, "tidy_data.txt", row.names = FALSE, 
-            quote = FALSE)
+
+write.table(ActivityMeans, "tidy_data.txt", row.names = FALSE, quote = FALSE)
