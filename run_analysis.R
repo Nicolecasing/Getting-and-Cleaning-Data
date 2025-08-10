@@ -9,7 +9,7 @@ if(!file.exists(getdataURL)) {
 }
 
 #unzip the zip file
-dataaPath <- "UCI HAR Dataset"
+dataPath <- "UCI HAR Dataset"
 if (!file.exists(dataPath)) {
   unzip(getdataURL)
 }
